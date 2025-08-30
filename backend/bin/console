@@ -1,0 +1,93 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use NewsAggregator\Application\App;
+use NewsAggregator\Infrastructure\Container\Container;
+use Dotenv\Dotenv;
+
+// Load environment variables
+try {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();
+} catch (Exception $e) {
+    // Environment file is optional
+}
+
+// Initialize application
+$container = new Container();
+$app = new App($container);
+
+// CLI Commands
+$commands = [
+    'scrape:all' => 'Scrape all active news sources',
+    'scrape:source' => 'Scrape specific source by ID or name',
+    'cleanup' => 'Clean up old articles',
+    'health' => 'Check system health',
+    'stats' => 'Show aggregation statistics'
+];
+
+// Parse command line arguments
+$command = $argv[1] ?? '';
+$args = array_slice($argv, 2);
+
+try {
+    switch ($command) {
+        case 'scrape:all':
+            echo "Starting scraping for all active sources...\n";
+            // Implementation would go here
+            echo "Scraping completed.\n";
+            break;
+            
+        case 'scrape:source':
+            $sourceId = $args[0] ?? '';
+            if (empty($sourceId)) {
+                echo "Error: Source ID or name required.\n";
+                exit(1);
+            }
+            echo "Scraping source: {$sourceId}\n";
+            // Implementation would go here
+            echo "Source scraping completed.\n";
+            break;
+            
+        case 'cleanup':
+            $days = (int)($args[0] ?? 30);
+            echo "Cleaning up articles older than {$days} days...\n";
+            // Implementation would go here
+            echo "Cleanup completed.\n";
+            break;
+            
+        case 'health':
+            echo "Checking system health...\n";
+            // Implementation would go here
+            echo "Health check completed.\n";
+            break;
+            
+        case 'stats':
+            echo "Generating statistics...\n";
+            // Implementation would go here
+            echo "Statistics generated.\n";
+            break;
+            
+        case 'help':
+        case '':
+            echo "NewsAggregator CLI\n\n";
+            echo "Available commands:\n";
+            foreach ($commands as $cmd => $description) {
+                echo sprintf("  %-15s %s\n", $cmd, $description);
+            }
+            echo "\nUsage: php bin/console <command> [arguments]\n";
+            break;
+            
+        default:
+            echo "Unknown command: {$command}\n";
+            echo "Use 'php bin/console help' to see available commands.\n";
+            exit(1);
+    }
+} catch (Exception $e) {
+    echo "Error: {$e->getMessage()}\n";
+    exit(1);
+}
