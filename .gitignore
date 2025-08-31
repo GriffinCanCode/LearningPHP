@@ -1,0 +1,130 @@
+# ===========================================
+# BACKEND (PHP) IGNORES
+# ===========================================
+
+# Composer
+/backend/vendor/
+/backend/composer.lock
+
+# Backend Environment variables
+/backend/.env
+/backend/.env.local
+/backend/.env.*.local
+
+# Backend Cache and storage
+/backend/storage/cache/*
+!/backend/storage/cache/.gitkeep
+/backend/storage/logs/*
+!/backend/storage/logs/.gitkeep
+/backend/storage/app/*
+!/backend/storage/app/.gitkeep
+
+# SQLite database
+/backend/storage/*.sqlite
+/backend/storage/*.db
+
+# PHPUnit
+phpunit.xml
+.phpunit.result.cache
+/backend/tests/_output/
+/backend/tests/_support/_generated/
+
+# PHP specific
+*.php~
+*.php.bak
+
+# Configuration files that might contain sensitive data
+/backend/config.local.php
+/backend/database.local.php
+
+# ===========================================
+# FRONTEND (TypeScript/React) IGNORES
+# ===========================================
+
+# Dependencies
+/frontend/node_modules/
+/frontend/.pnp
+/frontend/.pnp.js
+
+# Production builds
+/frontend/build/
+/frontend/dist/
+
+# Environment variables
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# Debug logs
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# ESLint cache
+/frontend/.eslintcache
+
+# Vite
+/frontend/.vite/
+
+# TypeScript
+/frontend/*.tsbuildinfo
+
+# Frontend cache directories
+/frontend/.cache/
+
+# ===========================================
+# PROJECT MANAGEMENT
+# ===========================================
+
+# Process IDs
+.backend.pid
+.frontend.pid
+
+# Development server logs
+server-*.log
+
+# Coverage reports
+coverage/
+build/
+
+# ===========================================
+# IDE AND EDITOR FILES
+# ===========================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===========================================
+# OS GENERATED FILES
+# ===========================================
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===========================================
+# BACKUP AND ERROR FILES
+# ===========================================
+
+*.backup
+*.bak
+*.orig
+error_log
+*.log
+
+# ===========================================
+# TEMPORARY FILES
+# ===========================================
+
+tmp/
+temp/
+.tmp/
