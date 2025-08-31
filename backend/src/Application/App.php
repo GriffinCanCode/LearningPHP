@@ -30,6 +30,26 @@ final readonly class App
     {
         // Register core services
         $this->container->singleton(DatabaseManager::class, function () {
+            $driver = $_ENV['DB_DRIVER'] ?? 'mysql';
+            
+            if ($driver === 'sqlite') {
+                $dbPath = __DIR__ . '/../../' . ($_ENV['DB_PATH'] ?? 'storage/database.sqlite');
+                // Ensure directory exists
+                $dir = dirname($dbPath);
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755, true);
+                }
+                
+                return new DatabaseManager(
+                    host: $dbPath, // For SQLite, host is the file path
+                    port: 0,
+                    database: '',
+                    username: '',
+                    password: '',
+                    driver: 'sqlite'
+                );
+            }
+            
             return new DatabaseManager(
                 host: $_ENV['DB_HOST'] ?? 'localhost',
                 port: (int)($_ENV['DB_PORT'] ?? 3306),
